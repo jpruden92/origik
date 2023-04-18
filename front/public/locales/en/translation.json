@@ -1,0 +1,19 @@
+{
+    "tagconfig.title": "Tags configuration",
+    "tagconfig.table.name": "Tag name",
+    "tagconfig.table.startDate": "Dynamic start date",
+    "tagconfig.table.groupsCapacity": "Groups capacity",
+    "tagconfig.table.recurrencyDays": "Dynamic recurrency (days)",
+    "tagconfig.table.active": "Active",
+    "tagconfig.description": "In this section you can configure your dynamics by creating labels. Once you generate a label, you can assign it to contacts.",
+    "tagconfig.create": "Create a new tag",
+    "tagconfig.edit": "Edit tag",
+    "tagconfig.error.name": "The name is required.",
+    "tagconfig.error.startDate": "The start date is required.",
+    "tagconfig.error.recurrencyDays": "The recurrency days is required.",
+    "tagconfig.error.groupsCapacity": "The groups capacity is required.",
+    "tagconfig.empty": "No tags created yet. Click on the button above to create a new tag.",
+    "contacts.title": "Contacts",
+    "common.actions": "Actions",
+    "common.save": "Save"
+}

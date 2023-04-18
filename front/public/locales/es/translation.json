@@ -1,0 +1,19 @@
+{
+    "tagconfig.title": "Configuración de etiquetas",
+    "tagconfig.table.name": "Nombre de etiqueta",
+    "tagconfig.table.startDate": "Fecha de inicio de la dinámica",
+    "tagconfig.table.groupsCapacity": "Tamaño de los grupos",
+    "tagconfig.table.recurrencyDays": "Recurrencia de la dinámica (días)",
+    "tagconfig.table.active": "Activo",
+    "tagconfig.description": "En esta sección puedes configurar tus dinámicas creando etiquetas. Una vez generes una etiqueta, podrás asignarla contactos.",
+    "tagconfig.create": "Crear etiqueta",
+    "tagconfig.edit": "Editar etiqueta",
+    "tagconfig.error.name": "El nombre de la etiqueta es obligatorio.",
+    "tagconfig.error.startDate": "La fecha de inicio de la dinámica es obligatoria.",
+    "tagconfig.error.recurrencyDays": "La recurrencia de la dinámica es obligatoria.",
+    "tagconfig.error.groupsCapacity": "El tamaño de los grupos es obligatorio.",
+    "tagconfig.empty": "No hay etiquetas creadas. Puedes crear una nueva etiqueta haciendo click en el botón de crear etiqueta.",
+    "contacts.title": "Contactos",
+    "common.actions": "Acciones",
+    "common.save": "Guardar"
+}

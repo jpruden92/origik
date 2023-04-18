@@ -1,0 +1,24 @@
+{
+  "name": "cameras-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-oauth2-jwt-bearer": "^1.1.0",
+    "pg": "^8.7.3",
+    "url": "^0.11.0",
+    "uuid": "^8.3.2",
+    "web3": "^1.9.0",
+    "web3-eth": "^1.9.0",
+    "web3-eth-personal": "^1.9.0"
+  }
+}
