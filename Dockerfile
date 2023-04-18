@@ -1,5 +1,5 @@
 # build environment
-FROM node:13.12.0-alpine as build
+FROM node:16-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY ./front/package.json ./
@@ -10,7 +10,7 @@ COPY ./front/. ./
 RUN npm run build
 
 # production environment
-FROM node:13.12.0-alpine
+FROM node:16-alpine
 WORKDIR /app
 COPY ./back/. ./
 RUN npm install --silent
