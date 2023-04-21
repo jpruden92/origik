@@ -49,7 +49,7 @@ const Sign = () => {
     }
 
     return (
-        <MainCard title={ 'Firmar un texto' } subtitle={ 'Firma cualquier texto de manera fácil y segura con tu identidad digital. Al presionar el botón de firmar, confirmarás la operación a través de Metamask y generarás una firma única. Luego, te proporcionaremos una URL personalizada para compartir el texto firmado junto a tu firma con quien desees.' }>
+        <MainCard title={ 'Firmar un texto' } subtitle={ 'Firma cualquier texto de manera fácil y segura con tu identidad digital. Al presionar el botón de firmar, confirmarás la operación a través de Metamask y generarás una firma única. Luego, te proporcionaremos una URL personalizada para compartir tu texto firmado con quien desees.' }>
             <>
                 <Grid container direction="column" spacing={2}>
                     { account.addr &&
