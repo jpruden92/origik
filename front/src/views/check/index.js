@@ -4,10 +4,9 @@
 import {
     Grid,
     TextField,
-    Button,
-    Select,
-    MenuItem,
-    InputAdornment
+    InputAdornment,
+    IconButton,
+    Tooltip
 } from '@mui/material';
 
 import { useEffect } from 'react';
@@ -24,7 +23,9 @@ import apiManager from 'services/api';
 
 import { useTranslation } from "react-i18next";
 
-import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom";
+
+import config from 'config';
 
 import Verified from '@mui/icons-material/Verified';
 
@@ -73,9 +74,15 @@ const Check = () => {
                                     value={validationInfo.signature}
                                     InputProps={{
                                         readOnly: true,
-                                        startAdornment: (
+                                        endAdornment: (
                                             <InputAdornment position="start">
-                                                <Verified />
+                                                <Tooltip title={ `${validationIdentity.name} ha generado esta firma utilizando una clave privada de acceso exclusivo. Para verificar la autenticidad de esta firma, nuestro sistema utiliza la clave pública de  ${validationIdentity.name}, la cual es de acceso público. Haz click para saber más.` }>
+                                                    <IconButton
+                                                        onClick={() => window.open(`https://medium.com/mycrypto/the-magic-of-digital-signatures-on-ethereum-98fe184dc9c7`, '_blank')}
+                                                    >
+                                                        <Verified />
+                                                    </IconButton>
+                                                </Tooltip>
                                             </InputAdornment>
                                         )
                                     }}
@@ -83,14 +90,20 @@ const Check = () => {
                             </Grid>
                             <Grid item container direction="column">
                                 <TextField
-                                    label="Dirección del Autor"
+                                    label="Dirección del Autor (clave pública)"
                                     defaultValue={validationInfo.owner_address}
                                     value={validationInfo.owner_address}
                                     InputProps={{
                                         readOnly: true,
-                                        startAdornment: (
+                                        endAdornment: (
                                             <InputAdornment position="start">
-                                                <Verified />
+                                                <Tooltip title={ `Ver información de la dirección en Etherscan.` }>
+                                                    <IconButton
+                                                        onClick={() => window.open(`${config.etherscanUrl}/address/${validationInfo.owner_address}`, '_blank')}
+                                                    >
+                                                        <Verified />
+                                                    </IconButton>
+                                                </Tooltip>
                                             </InputAdornment>
                                         )
                                     }}
@@ -103,9 +116,15 @@ const Check = () => {
                                     value={validationIdentity.name}
                                     InputProps={{
                                         readOnly: true,
-                                        startAdornment: (
+                                        endAdornment: (
                                             <InputAdornment position="start">
-                                                <Verified />
+                                                <Tooltip title={ `Ver los detalles del NFT (Non Fungible Token) que identifica a ${validationIdentity.name} en Opensea.` }>
+                                                    <IconButton
+                                                        onClick={() => window.open(`${config.openseaUrl}/${validationIdentity.contractAddress}/${validationIdentity.tokenId}`, '_blank')}
+                                                    >
+                                                        <Verified />
+                                                    </IconButton>
+                                                </Tooltip>
                                             </InputAdornment>
                                         )
                                     }}

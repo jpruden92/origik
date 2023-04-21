@@ -5,13 +5,14 @@ const config = {
     defaultPath: '/dashboard/default',
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 12,
+    openseaUrl: 'https://testnets.opensea.io/es/assets/goerli',
     openseaApi: 'https://testnets-api.opensea.io/api/v1',
     collectionName: 'Pru Test Collection',
     etherscanUrl: 'https://goerli.etherscan.io',
     //apiUrl: 'http://localhost:3000',
     //frontUrl: 'http://localhost:3001',
     apiUrl: '.',
-    frontUrl: 'https://verify-identity-production.up.railway.app',    
+    frontUrl: 'https://origik.up.railway.app',    
 };
 
 export default config;
