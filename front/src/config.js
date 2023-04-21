@@ -8,6 +8,7 @@ const config = {
     openseaApi: 'https://testnets-api.opensea.io/api/v1',
     collectionName: 'Pru Test Collection',
     etherscanUrl: 'https://goerli.etherscan.io',
+    apiUrl: '.'
 };
 
 export default config;
