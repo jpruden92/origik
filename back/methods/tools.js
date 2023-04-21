@@ -2,7 +2,7 @@ const tools = require('../utils/tools');
 const db = require('../utils/db');
 
 const load = (app) => {
-    app.post('/api/save-verification', async (req, res) => {
+    app.post('/api/verification', async (req, res) => {
         const originalText = req.body.originalText;
         const sign = req.body.sign;
 
@@ -32,6 +32,24 @@ const load = (app) => {
         res.send({
             key: randKey
         });
+    });
+
+    app.get('/api/verification', async (req, res) => {
+        const key = req.query.key;
+
+        if (!key) {
+            res.status(400).send('Missing params.');
+            return;
+        }
+
+        const signedTextData = await db.getSignedText(key);
+
+        if (!signedTextData) {
+            res.status(400).send('No signed text found for key.');
+            return;
+        }
+
+        res.send(signedTextData);
     });
 }
 

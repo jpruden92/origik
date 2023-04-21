@@ -52,7 +52,7 @@ const getSignedText = async (key) => {
         await _createSignedTexts();
 
         pool.query(
-            `SELECT * FROM contacts WHERE key = $1`,
+            `SELECT * FROM signed_texts WHERE key = $1`,
             [key],
             async (err, res) => {
                 if (err) {
