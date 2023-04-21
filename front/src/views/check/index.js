@@ -48,61 +48,69 @@ const Check = () => {
     }, []);
 
     return (
-        <MainCard title={'Check'} subtitle={ t('tagconfig.description') }>
+        <MainCard title={ validationIdentity.name ? `${validationIdentity.name} ha firmado este texto` : 'Check' } subtitle={ 'A continuación puedes ver el contenido del texto firmado y la información detallada de la firma.' }>
             <>
-                <Grid container direction="column" spacing={1}>
+                <Grid container direction="column" spacing={2}>
                     {
                         validationInfo && validationInfo.signature &&
                         <>
-                            <TextField
-                                label="Texto firmado"
-                                defaultValue={validationInfo.text}
-                                value={validationInfo.text}
-                                multiline
-                                rows={20}
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                            />
-                            <TextField
-                                label="Firma"
-                                defaultValue={validationInfo.signature}
-                                value={validationInfo.signature}
-                                InputProps={{
-                                    readOnly: true,
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Verified />
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
-                            <TextField
-                                label="Dirección del Autor"
-                                defaultValue={validationInfo.owner_address}
-                                value={validationInfo.owner_address}
-                                InputProps={{
-                                    readOnly: true,
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Verified />
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
-                            <TextField
-                                label="Identidad del autor"
-                                defaultValue={validationIdentity.name}
-                                value={validationIdentity.name}
-                                InputProps={{
-                                    readOnly: true,
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Verified />
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
+                            <Grid item container direction="column">
+                                <TextField
+                                    label="Texto firmado"
+                                    defaultValue={validationInfo.text}
+                                    value={validationInfo.text}
+                                    multiline
+                                    rows={20}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item container direction="column">
+                                <TextField
+                                    label="Firma"
+                                    defaultValue={validationInfo.signature}
+                                    value={validationInfo.signature}
+                                    InputProps={{
+                                        readOnly: true,
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <Verified />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item container direction="column">
+                                <TextField
+                                    label="Dirección del Autor"
+                                    defaultValue={validationInfo.owner_address}
+                                    value={validationInfo.owner_address}
+                                    InputProps={{
+                                        readOnly: true,
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <Verified />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item container direction="column">
+                                <TextField
+                                    label="Identidad del autor"
+                                    defaultValue={validationIdentity.name}
+                                    value={validationIdentity.name}
+                                    InputProps={{
+                                        readOnly: true,
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <Verified />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                />
+                            </Grid>
                         </>
                     }
                 </Grid>

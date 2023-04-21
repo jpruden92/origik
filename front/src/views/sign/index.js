@@ -5,8 +5,7 @@ import {
     Grid,
     TextField,
     Button,
-    Select,
-    MenuItem
+    InputAdornment
 } from '@mui/material';
 
 import { useEffect } from 'react';
@@ -25,12 +24,13 @@ import apiManager from 'services/api';
 
 import { useTranslation } from "react-i18next";
 
+import Verified from '@mui/icons-material/Verified';
+
 const Sign = () => {
     const theme = useTheme();
 
     const [ textFieldSign, setTextFieldSign ] = useState('');
-    const [ selectedAccount, setSelectedAccount ] = useState('');
-    const [ accounts, setAccounts ] = useState([]);
+    const [ account, setAccount ] = useState({});
     const [ verificationKey, setVerificationKey ] = useState('');
 
     const { t } = useTranslation();
@@ -38,56 +38,68 @@ const Sign = () => {
     useEffect(async () => {
         let accounts = await blockchain.getAccounts();
         accounts = accounts.filter(account => account.assets.length > 0);
-        setAccounts(accounts);
+        setAccount(accounts[0]);
     }, []);
 
     const _onClickSign = async () => {
-        const sign = await blockchain.signText(textFieldSign, selectedAccount);
+        const sign = await blockchain.signText(textFieldSign, account.addr);
         console.info(sign);
         const varificationInfo = await apiManager.setVerification(textFieldSign, sign);
         setVerificationKey(varificationInfo.key);
     }
 
     return (
-        <MainCard title={'Firmar'} subtitle={ t('tagconfig.description') }>
+        <MainCard title={ 'Firmar un texto' } subtitle={ 'Firma cualquier texto de manera fácil y segura con tu identidad digital. Al presionar el botón de firmar, confirmarás la operación a través de Metamask y generarás una firma única única. Luego, te proporcionaremos una URL personalizada para compartir tu firma con quien desees.' }>
             <>
-                <Grid container direction="column" spacing={1}>
-                    <Select
-                        label="Wallets"
-                        value={selectedAccount}
-                        onChange={(e) => { setSelectedAccount(e.target.value) }}
-                    >
-                        {
-                            accounts.map((account, index) => {
-                                return <MenuItem key={index} value={account.addr}>{account.assets[0].name} - {account.addr}</MenuItem>
-                            })
-                        }
-                    </Select>
-                    <TextField
-                        id="filled-multiline-static"
-                        label="Texto a firmar"
-                        multiline
-                        rows={4}
-                        defaultValue={textFieldSign}
-                        variant="filled"
-                        onChange={(e) => { setTextFieldSign(e.target.value) }}
-                    />
-                    <Button
-                        variant="outlined"
-                        onClick={() => { _onClickSign() }}
-                    >
-                        Firmar
-                    </Button>
-                    { verificationKey &&
-                        <TextField
-                            label="URL de verificación"
-                            defaultValue={`${config.frontUrl}/check?key=${verificationKey}`}
-                            value={`${config.frontUrl}/check?key=${verificationKey}`}
-                            InputProps={{
-                                readOnly: true
-                            }}
-                        />
+                <Grid container direction="column" spacing={2}>
+                    { account.addr &&
+                        <Grid item container direction="column">
+                            <TextField
+                                label="Identidad que va a firmar"
+                                defaultValue={`${account.assets[0].name} - ${account.addr}`}
+                                value={`${account.assets[0].name} - ${account.addr}`}
+                                InputProps={{
+                                    readOnly: true,
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <Verified />
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
+                        </Grid>
                     }
+                    <Grid item container direction="column">
+                        <TextField
+                            id="filled-multiline-static"
+                            label="Texto a firmar"
+                            multiline
+                            rows={4}
+                            defaultValue={textFieldSign}
+                            variant="filled"
+                            onChange={(e) => { setTextFieldSign(e.target.value) }}
+                        />
+                    </Grid>
+                    <Grid item container direction="column">
+                        <Button
+                            variant="outlined"
+                            onClick={() => { _onClickSign() }}
+                        >
+                            Firmar
+                        </Button>
+                    </Grid>
+                    <Grid item container direction="column">
+                        { verificationKey &&
+                            <TextField
+                                label="URL de verificación"
+                                defaultValue={`${config.frontUrl}/check?key=${verificationKey}`}
+                                value={`${config.frontUrl}/check?key=${verificationKey}`}
+                                InputProps={{
+                                    readOnly: true
+                                }}
+                            />
+                        }
+                    </Grid>
                 </Grid>
             </>
         </MainCard>
