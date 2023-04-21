@@ -25,6 +25,14 @@ const other = {
             url: '/profile',
             icon: icons.IconTag,
             breadcrumbs: false
+        },
+        {
+            id: 'check',
+            title: 'Check',
+            type: 'item',
+            url: '/check',
+            icon: icons.IconTag,
+            breadcrumbs: false
         }
     ]
 };

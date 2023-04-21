@@ -18,6 +18,8 @@ import MainCard from 'ui-component/cards/MainCard';
 
 import moment from 'moment';
 
+import config from 'config';
+
 import blockchain from 'utils/blockchain';
 import apiManager from 'services/api';
 
@@ -29,6 +31,7 @@ const Sign = () => {
     const [ textFieldSign, setTextFieldSign ] = useState('');
     const [ selectedAccount, setSelectedAccount ] = useState('');
     const [ accounts, setAccounts ] = useState([]);
+    const [ verificationKey, setVerificationKey ] = useState('');
 
     const { t } = useTranslation();
 
@@ -41,7 +44,8 @@ const Sign = () => {
     const _onClickSign = async () => {
         const sign = await blockchain.signText(textFieldSign, selectedAccount);
         console.info(sign);
-        await apiManager.setVerification(textFieldSign, sign);
+        const varificationInfo = await apiManager.setVerification(textFieldSign, sign);
+        setVerificationKey(varificationInfo.key);
     }
 
     return (
@@ -74,6 +78,16 @@ const Sign = () => {
                     >
                         Firmar
                     </Button>
+                    { verificationKey &&
+                        <TextField
+                            label="URL de verificación"
+                            defaultValue={`${config.frontUrl}/check?key=${verificationKey}`}
+                            value={`${config.frontUrl}/check?key=${verificationKey}`}
+                            InputProps={{
+                                readOnly: true
+                            }}
+                        />
+                    }
                 </Grid>
             </>
         </MainCard>

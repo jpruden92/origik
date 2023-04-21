@@ -8,7 +8,10 @@ const config = {
     openseaApi: 'https://testnets-api.opensea.io/api/v1',
     collectionName: 'Pru Test Collection',
     etherscanUrl: 'https://goerli.etherscan.io',
-    apiUrl: '.'
+    //apiUrl: 'http://localhost:3000',
+    //frontUrl: 'http://localhost:3001',
+    apiUrl: '.',
+    frontUrl: 'https://verify-identity-production.up.railway.app',    
 };
 
 export default config;

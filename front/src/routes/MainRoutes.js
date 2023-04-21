@@ -7,6 +7,7 @@ import Loadable from 'ui-component/Loadable';
 // sample page routing
 const Sign = Loadable(lazy(() => import('views/sign')));
 const Profile = Loadable(lazy(() => import('views/profile')));
+const Check = Loadable(lazy(() => import('views/check')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -25,6 +26,10 @@ const MainRoutes = {
         {
             path: '/profile',
             element: <Profile />
+        },
+        {
+            path: '/check',
+            element: <Check />
         }
     ]
 };

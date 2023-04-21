@@ -55,5 +55,6 @@ const getAccounts = async () => {
 
 export default {
     signText,
+    getAssets,
     getAccounts
 }
