@@ -20,7 +20,7 @@ export const theme = (customization) => {
         colors: color,
         heading: color.grey300,
         background: color.darkBackground,
-        darkTextPrimary: color.grey100,
+        darkTextPrimary: color.grey900,
         darkTextSecondary: color.grey200,
         textDark: color.grey100,
         menuSelected: color.secondaryDark,

@@ -94,6 +94,14 @@ export default function componentStyleOverrides(theme) {
                     opacity: 0
                 }
             }
+        },
+        MuiTooltip: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'black',
+                    color: 'white',
+                }
+            }
         }
     };
 }

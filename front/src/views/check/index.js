@@ -53,7 +53,7 @@ const Check = () => {
             <>
                 <Grid container direction="column" spacing={2}>
                     {
-                        validationInfo && validationInfo.signature &&
+                        validationInfo && validationInfo.signature && validationIdentity && validationIdentity.name &&
                         <>
                             <Grid item container direction="column">
                                 <TextField
