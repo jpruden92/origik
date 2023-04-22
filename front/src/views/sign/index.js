@@ -76,14 +76,15 @@ const Sign = () => {
                             multiline
                             rows={4}
                             defaultValue={textFieldSign}
-                            variant="filled"
                             onChange={(e) => { setTextFieldSign(e.target.value) }}
                         />
                     </Grid>
                     <Grid item container direction="column">
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             onClick={() => { _onClickSign() }}
+                            size='large'
+                            disableElevation
                         >
                             Firmar
                         </Button>

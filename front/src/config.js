@@ -9,10 +9,10 @@ const config = {
     openseaApi: 'https://testnets-api.opensea.io/api/v1',
     collectionName: 'Pru Test Collection',
     etherscanUrl: 'https://goerli.etherscan.io',
-    //apiUrl: 'http://localhost:3000',
-    //frontUrl: 'http://localhost:3001',
-    apiUrl: '.',
-    frontUrl: 'https://id.origik.com',    
+    apiUrl: 'http://localhost:3000',
+    frontUrl: 'http://localhost:3001',
+//    apiUrl: '.',
+//    frontUrl: 'https://id.origik.com',    
 };
 
 export default config;

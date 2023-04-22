@@ -64,9 +64,6 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         background: theme.palette.background.default,
                         color: theme.palette.text.primary,
                         borderRight: 'none',
-                        [theme.breakpoints.up('md')]: {
-                            top: '88px'
-                        }
                     }
                 }}
                 ModalProps={{ keepMounted: true }}
