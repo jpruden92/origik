@@ -12,7 +12,7 @@ const config = {
     //apiUrl: 'http://localhost:3000',
     //frontUrl: 'http://localhost:3001',
     apiUrl: '.',
-    frontUrl: 'https://origik.up.railway.app',    
+    frontUrl: 'https://id.origik.com',    
 };
 
 export default config;
