@@ -21,20 +21,21 @@ const _createSignedTexts = async () => {
             key VARCHAR(255) PRIMARY KEY,
             text TEXT NOT NULL,
             signature VARCHAR(255) NOT NULL,
-            owner_address VARCHAR(255) NOT NULL
+            owner_address VARCHAR(255) NOT NULL,
+            url VARCHAR(255)
         )
     `;
     await pool.query(query);
 };
 
-const createSignedText = async (key, text, signature, ownerAddress) => {
+const createSignedText = async (key, text, signature, ownerAddress, url) => {
     return new Promise(async (resolve, reject) => {
         // Create table if not exists
         await _createSignedTexts();
 
         pool.query(
-            `INSERT INTO signed_texts (key, text, signature, owner_address) VALUES ($1, $2, $3, $4) RETURNING *`,
-            [key, text, signature, ownerAddress],
+            `INSERT INTO signed_texts (key, text, signature, owner_address, url) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [key, text, signature, ownerAddress, url],
             (err, res) => {
                 if (err) {
                     reject(err);
@@ -65,7 +66,27 @@ const getSignedText = async (key) => {
     });
 };
 
+const getAllUrls = async () => {
+    return new Promise(async (resolve, reject) => {
+        // Create table if not exists
+        await _createSignedTexts();
+
+        pool.query(
+            // Select only not null urls, group by url and join keys with array_agg
+            `SELECT url, array_agg(key) AS keys FROM signed_texts WHERE url IS NOT NULL GROUP BY url`,
+            async (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res.rows);
+                }
+            }
+        );
+    });
+};
+
 module.exports = {
     createSignedText,
-    getSignedText
+    getSignedText,
+    getAllUrls
 };

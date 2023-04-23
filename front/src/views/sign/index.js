@@ -30,6 +30,7 @@ const Sign = () => {
     const theme = useTheme();
 
     const [ textFieldSign, setTextFieldSign ] = useState('');
+    const [ textFieldUrl, setTextFieldUrl ] = useState('');
     const [ account, setAccount ] = useState({});
     const [ verificationKey, setVerificationKey ] = useState('');
 
@@ -44,7 +45,7 @@ const Sign = () => {
     const _onClickSign = async () => {
         const sign = await blockchain.signText(textFieldSign, account.addr);
         console.info(sign);
-        const varificationInfo = await apiManager.setVerification(textFieldSign, sign);
+        const varificationInfo = await apiManager.setVerification(textFieldSign, sign, textFieldUrl);
         setVerificationKey(varificationInfo.key);
     }
 
@@ -74,9 +75,17 @@ const Sign = () => {
                             id="filled-multiline-static"
                             label="Texto a firmar"
                             multiline
-                            rows={4}
+                            rows={10}
                             defaultValue={textFieldSign}
                             onChange={(e) => { setTextFieldSign(e.target.value) }}
+                        />
+                    </Grid>
+                    <Grid item container direction="column">
+                        <TextField
+                            id="filled-multiline-static"
+                            label="URL en la que aparece el texto (opcional)"
+                            defaultValue={textFieldUrl}
+                            onChange={(e) => { setTextFieldUrl(e.target.value) }}
                         />
                     </Grid>
                     <Grid item container direction="column">

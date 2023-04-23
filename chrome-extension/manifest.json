@@ -1,0 +1,15 @@
+{
+    "name": "Mi extensión",
+    "version": "1.0",
+    "description": "Inyecta un mensaje en las páginas de una lista específica de URLs",
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "manifest_version": 2
+}

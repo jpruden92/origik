@@ -3,10 +3,11 @@ import axios from 'axios';
 import config from 'config';
 
 const apiManager = {
-    setVerification: async (text, sign) => {
+    setVerification: async (text, sign, url) => {
         const response = await axios.post(`${config.apiUrl}/api/verification`, {
             originalText: text,
-            sign: sign
+            sign: sign,
+            url: url
         });
 
         return response.data;

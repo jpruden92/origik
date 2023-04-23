@@ -5,6 +5,7 @@ const load = (app) => {
     app.post('/api/verification', async (req, res) => {
         const originalText = req.body.originalText;
         const sign = req.body.sign;
+        const url = req.body.url;
 
         if (!originalText || !sign) {
             res.status(400).send('Missing params.');
@@ -27,7 +28,7 @@ const load = (app) => {
 
         const randKey = tools.generateRandKey(50);
 
-        await db.createSignedText(randKey, originalText, sign, originAddr);
+        await db.createSignedText(randKey, originalText, sign, originAddr, url);
 
         res.send({
             key: randKey
@@ -50,6 +51,12 @@ const load = (app) => {
         }
 
         res.send(signedTextData);
+    });
+
+    app.get('/api/url_list', async (req, res) => {
+        const urls = await db.getAllUrls();
+
+        res.send(urls);
     });
 }
 
