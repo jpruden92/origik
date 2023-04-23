@@ -72,8 +72,8 @@ const getAllUrls = async () => {
         await _createSignedTexts();
 
         pool.query(
-            // Select only not null urls, group by url and join keys with array_agg
-            `SELECT url, array_agg(key) AS keys FROM signed_texts WHERE url IS NOT NULL GROUP BY url`,
+            // Select only not null urls, group by url and join keys and owners with array_agg into the same array
+            `SELECT url, array_agg(key) as keys, array_agg(owner_address) as owners FROM signed_texts WHERE url IS NOT NULL GROUP BY url`,
             async (err, res) => {
                 if (err) {
                     reject(err);
