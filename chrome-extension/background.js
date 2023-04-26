@@ -15,13 +15,52 @@ const normalizeUrl = url => {
     return url.replace(/\/\/www\./, "//").replace(/\/$/, "");
 }
 
-const func = (coincidence) => {
-    coincidence.keys.forEach(key => {
+const func = async (coincidence) => {
+    const config = {
+        openseaApi: 'https://testnets-api.opensea.io/api/v1',
+        openseaUrl: 'https://testnets.opensea.io/es/assets/goerli',
+        collectionName: 'Pru Test Collection'
+    };
+
+    // Inject toolbar
+    const div = document.createElement('div');
+    const body = document.querySelector('body');
+    let toolbar_url = chrome.runtime.getURL('/toolbar.html');
+
+    const response = await fetch(toolbar_url);
+    const html = await response.text();
+
+    div.innerHTML = html;
+    body.insertBefore(div, body.firstChild);
+
+    // Inject assets
+    for (const owner of coincidence.owners) {
         const div = document.createElement('div');
-        const body = document.querySelector('body');
-        div.textContent = key;
-        body.insertBefore(div, body.firstChild);
-    });
+        const body = document.querySelector('#origik_avatars');
+
+        const response = await fetch(`${config.openseaApi}/assets?owner=${owner}`);
+        const data = await response.json();
+
+        const assets = data.assets.filter(asset => asset.collection.name === config.collectionName).map((asset) => {
+            return {
+                name: asset.name,
+                image: asset.image_url,
+                tokenId: asset.token_id,
+                contractAddress: asset.asset_contract.address,
+                properties: asset.traits.map((trait) => {
+                    return {
+                        type: trait.trait_type,
+                        value: trait.value
+                    }
+                })
+            };
+        });
+
+        console.info('Assets', assets);
+
+        div.innerHTML = `<a href="${config.openseaUrl}/${assets[0].contractAddress}/${assets[0].tokenId}" class="avatars__item" target="_blank"><img class="avatar" src="${assets[0].image}" alt=""></a>`;
+        body.append(div);
+    };
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
@@ -33,7 +72,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     if (changeInfo.status === 'complete' && coincidence) {
         console.info('Injecting content script');
         chrome.scripting.executeScript({
-            target: {tabId, allFrames: true},
+            target: {tabId},
             func,
             args: [coincidence]
         });
