@@ -15,7 +15,7 @@ services:
       - key: RARIBLE_API_URL
         value: https://testnet-api.rarible.org/v0.1
       - key: COLLECTION_NAME
-        value: Origik
+        value: Origik Identity
       - key: COLLECTION_NETWORK
         value: ETHEREUM
       - key: RARIBLE_API_KEY
